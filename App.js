@@ -1,26 +1,19 @@
-//import { StatusBar } from 'expo-status-bar';  <StatusBar style="auto" />
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import PostList from './src/components/PostList';
+import styled from 'styled-components/native';
+import PostList from "./src/screens/PostList/index";
 
 export default class App extends React.Component {
     render(){
         return(
-            <View style={styles.container}>
-                <Text>teste</Text>
-                <Text>teste</Text>
-                <Text>teste</Text>
-                <Text>teste</Text>
-                <Text>teste</Text>
-                <Text>teste</Text>
+            <Container>
                 <PostList />    
-            </View> 
+            </Container> 
         )
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#f3c1a0',
-    },
-});
+const Container = styled.SafeAreaView`
+    justify-content: center;
+    background-color: #ccc;
+    padding-top: 25px;
+`;

@@ -147,7 +147,7 @@ export default class PostList extends React.Component {
                     <TouchableOpacity style={styles.teste} onPress={
                             () => { visibleModal(true) }
                         }>
-                        <Text>xvideos.com</Text>
+                        <Text>teste</Text>
                     </TouchableOpacity>
                 </View>
             </View>

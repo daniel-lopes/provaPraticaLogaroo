@@ -37,20 +37,26 @@ export default class ModalForm extends Component {
         this.setState({ modalVisible: visible });
     }
 
-    save(){
-        this.props.addPost (
-            this.state.title,
-            this.state.text
-        );
+    setModalVisible2(visible){
+        this.setState({
+            showModalConfirm: visible
+        })
+    }
 
-        this.onChangeHandler('modalVisible', false);
-        this.onChangeHandler('showModalConfirm', true);
-        console.log('Vai mostrar o modal???? ' + this.state.showModalConfirm)
+    confirm(show){
+        console.log('O modal vai aparecer?? '+ show)
+        return(
+            <ModalConfirm
+                title="Post adicionado com sucesso!"
+                visible = { show }
+            />
+        )   
     }
 
     render() {
         return (
             <View>
+                { this.confirm(this.state.showModalConfirm) }
                 <ModalConfirm
                     title="Post adicionado com sucesso!"
                     visible = { this.state.showModalConfirm }
@@ -88,7 +94,13 @@ export default class ModalForm extends Component {
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        this.save()
+                                        this.props.addPost (
+                                            this.state.title,
+                                            this.state.text
+                                        );
+
+                                        this.onChangeHandler('modalVisible', false);
+                                        this.setModalVisible2(true);
                                     }}>
                                     <Text style={[styles.btn, styles.btnAdd]}>Adicionar</Text>
                                 </TouchableOpacity>

@@ -3,31 +3,6 @@ import { Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 
 //import { capitalizeFirstLetter } from '../util';
 
-const deletePostItem = (id) => {
-	fetch('https://jsonplaceholder.typicode.com/posts/'+ id, {
-	  		method: 'DELETE',
-		}).then(response => response.json())
-	      .then(json => {
-	  			console.log(json)
-       	})
-	console.log(`Post ${id} deletado`);
-	return id;
-}
-
-const deletePost = (post) => {
-	let del = false;
-	console.log('Delentando post' + post.id)
-	Alert.alert(
-      'Delete Address',
-      'Are you sure want to delete this post ' +post.id+ '?',
-      [
-        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-        {text: 'OK', onPress: () => deletePostItem(post.id)},
-      ],
-      { cancelable: false }
-    )		
-}	
-
 const PostListItem = props => {
 	const { post, deletePost } = props;
 	const { id, title, body } = post;

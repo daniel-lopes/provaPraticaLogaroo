@@ -43,11 +43,8 @@ export default class ModalForm extends Component {
             this.state.text
         );
 
-        this.setModalVisible(false);
+        this.onChangeHandler('modalVisible', false);
         this.onChangeHandler('showModalConfirm', true);
-        this.setState({
-            showModalConfirm: true,
-        })
         console.log('Vai mostrar o modal???? ' + this.state.showModalConfirm)
     }
 
@@ -57,7 +54,6 @@ export default class ModalForm extends Component {
                 <ModalConfirm
                     title="Post adicionado com sucesso!"
                     visible = { this.state.showModalConfirm }
-                    key={1}
                 />
                 <Modal
                     style={styles.modal}

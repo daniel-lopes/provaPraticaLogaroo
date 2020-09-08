@@ -29,19 +29,17 @@ const deletePost = (post) => {
 }	
 
 const PostListItem = props => {
-	const { post, altualizaState } = props;
+	const { post, deletePost } = props;
 	const { id, title, body } = post;
 
 	return (
-		<View style={styles.container}>
+		<View style={styles.card}>
 			<View style={styles.titleMoreIcon}>
 				<Text style={styles.title}>
-					{ id }
+					{ title }
 				</Text>
 				<TouchableOpacity style={styles.icon} onPress={
-					() => {
-							altualizaState(post.id)
-						}
+					() => { deletePost(post.id) }
 				}>
 					<Text>X</Text>
 	            </TouchableOpacity>
@@ -54,7 +52,7 @@ const PostListItem = props => {
 }
 
 const styles = StyleSheet.create({
-	container: {
+	card: {
 		height: 'auto',
 		backgroundColor: '#fff',
 		marginBottom: 20,

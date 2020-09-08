@@ -2,18 +2,13 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PostList from './src/components/PostList';
+import ModalForm from './src/components/ModalForm';
 
 export default class App extends React.Component {
     render(){
-        return(
+        return (
             <View style={styles.container}>
-                <Text>teste</Text>
-                <Text>teste</Text>
-                <Text>teste</Text>
-                <Text>teste</Text>
-                <Text>teste</Text>
-                <Text>teste</Text>
-                <PostList />    
+                <PostList styles={styles.lista} />
             </View> 
         )
     }
@@ -22,5 +17,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#f3c1a0',
-    },
+        height: '100%'
+    }
 });

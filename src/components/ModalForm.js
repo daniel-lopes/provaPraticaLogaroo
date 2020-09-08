@@ -6,8 +6,11 @@ import {
     Alert,
     StyleSheet,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    Dimensions
 } from 'react-native';
+
+import ModalConfirm from './ModalConfirm';
 
 export default class ModalForm extends Component {
 
@@ -16,25 +19,46 @@ export default class ModalForm extends Component {
 
         this.state = {
             modalVisible: this.props.visible,
+            showModalConfirm: false,
             title: '',
             text: ''
         };
     }
 
     onChangeHandler(field, value){
+        this.setState(
+            prevState => ({
+                [field]: value
+            })
+        )
+    }
+
+    setModalVisible(visible){
+        this.setState({ modalVisible: visible });
+    }
+
+    save(){
+        this.props.addPost (
+            this.state.title,
+            this.state.text
+        );
+
+        this.setModalVisible(false);
+        this.onChangeHandler('showModalConfirm', true);
         this.setState({
-            [field]: value
+            showModalConfirm: true,
         })
+        console.log('Vai mostrar o modal???? ' + this.state.showModalConfirm)
     }
 
     render() {
-
-        const setModalVisible = visible => {
-            this.setState({ modalVisible: visible });
-        }
-
         return (
             <View>
+                <ModalConfirm
+                    title="Post adicionado com sucesso!"
+                    visible = { this.state.showModalConfirm }
+                    key={1}
+                />
                 <Modal
                     style={styles.modal}
                     animationType="slide"
@@ -62,17 +86,13 @@ export default class ModalForm extends Component {
                             <View style={styles.buttoms}>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        setModalVisible(!this.state.modalVisible);
+                                        this.setModalVisible(!this.state.modalVisible);
                                     }}>
                                     <Text style={[styles.btn, styles.btnCancel]}>Cancelar</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        this.props.addPost(
-                                            this.state.title,
-                                            this.state.text
-                                        );
-                                        setModalVisible(false);
+                                        this.save()
                                     }}>
                                     <Text style={[styles.btn, styles.btnAdd]}>Adicionar</Text>
                                 </TouchableOpacity>
@@ -80,24 +100,17 @@ export default class ModalForm extends Component {
                         </View>
                     </View>
                 </Modal>
-                <View style={styles.container}>
-                    <TouchableOpacity
-                        style={styles.btnModal}
-                        onPress={() => {
-                            setModalVisible(true);
-                        }}>
+                <TouchableOpacity
+                    style={styles.btnModal}
+                    onPress={() => {
+                        this.setModalVisible(true);
+                    }}>
                     <Text>+</Text>
-                    </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
             </View>
         );
     }
 }
-
-
-// onPress={() => {
-//     this.setModalVisible(true);
-// }}
 
 const styles = StyleSheet.create({
     container: {
@@ -153,15 +166,17 @@ const styles = StyleSheet.create({
         color: '#fff'
     },
     btnModal: {
-        position: 'absolute',
-        width: 56,
-        height: 56,
-        alignItems: 'center',
-        justifyContent: 'center',
-        right: 20,
-        bottom: 20,
-        backgroundColor: '#03A9F4',
-        borderRadius: 30,
-        elevation: 1
+        position: 'absolute', 
+        width: 56, 
+        height: 56, 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        right: 20, 
+        bottom: '100%', 
+        backgroundColor: '#03A9F4', 
+        borderRadius: 30, 
+        elevation: 8,
+        top: (Dimensions.get('window').height * 0.97),
+        zIndex: 1
     }
 })

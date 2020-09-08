@@ -120,11 +120,12 @@ export default class PostList extends React.Component {
         }
 
 		return (
-            <View>
-                <View style={styles.btnModal}>
-                    <ModalForm visible= { this.state.visibleModal } addPost = { addPost } />    
-                </View> 
-            
+            <View>          
+                <ModalForm 
+                    visible= { this.state.visibleModal }
+                    addPost = { addPost } 
+                    confirm = { false }
+                /> 
                 <View style={styles.container}> 
                     <View style={styles.searchSection}>
                         <TextInput
@@ -143,12 +144,8 @@ export default class PostList extends React.Component {
         				renderItem={({ item }) => (
         					<PostListItem post={item} deletePost={ deletePost } />
         				)}
-        				keyExtractor={ item => item.id.toString()} />
-                    <TouchableOpacity style={styles.teste} onPress={
-                            () => { visibleModal(true) }
-                        }>
-                        <Text>teste</Text>
-                    </TouchableOpacity>
+        				keyExtractor={ item => item.id.toString()}
+                    />
                 </View>
             </View>
 		);
@@ -157,17 +154,11 @@ export default class PostList extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-        marginTop: 50
-    },
-    teste: {
-        marginTop: 500
-    },
-    butao: {
-        marginTop: 700,
-        backgroundColor: 'red'
+        marginTop: 50,
+        elevation: 1
     },
     list: {
-		marginBottom: 80
+		marginBottom: 150
 	},
     searchSection: {
         flexDirection: 'row',
@@ -192,17 +183,6 @@ const styles = StyleSheet.create({
         paddingTop: 7,
         paddingBottom: 7,
         /* color: '#424242' */
-    },
-    btnModal: {
-        position: 'absolute',
-        width: 56,
-        height: 56,
-        alignItems: 'center',
-        justifyContent: 'center',
-        right: 20,
-        bottom: 20,
-        backgroundColor: '#03A9F4',
-        borderRadius: 30
     }
 })
 

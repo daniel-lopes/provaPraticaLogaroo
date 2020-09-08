@@ -36,7 +36,7 @@ const PostListItem = props => {
 		<View style={styles.card}>
 			<View style={styles.titleMoreIcon}>
 				<Text style={styles.title}>
-					{ title }
+					{ id }
 				</Text>
 				<TouchableOpacity style={styles.icon} onPress={
 					() => { deletePost(post.id) }

@@ -80,8 +80,9 @@ export default class ModalForm extends Component {
                         </View>
                     </View>
                 </Modal>
-                <View style={styles.btnModal}>
+                <View style={styles.container}>
                     <TouchableOpacity
+                        style={styles.btnModal}
                         onPress={() => {
                             setModalVisible(true);
                         }}>
@@ -99,6 +100,11 @@ export default class ModalForm extends Component {
 // }}
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        backgroundColor: 'red'
+    },
     modal : {
         flex: 1,
         flexDirection: 'column',
@@ -156,7 +162,6 @@ const styles = StyleSheet.create({
         bottom: 20,
         backgroundColor: '#03A9F4',
         borderRadius: 30,
-        elevation: 8,
-        zIndex: 2
+        elevation: 1
     }
 })

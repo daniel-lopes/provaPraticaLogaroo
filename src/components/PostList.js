@@ -157,9 +157,7 @@ export default class PostList extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-         marginTop: 50,
-         zIndex: 1,
-        elevation: 1
+        marginTop: 50
     },
     teste: {
         marginTop: 500
@@ -169,9 +167,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'red'
     },
     list: {
-		marginBottom: 80,
-        zIndex: 1,
-        elevation: 1
+		marginBottom: 80
 	},
     searchSection: {
         flexDirection: 'row',
@@ -206,9 +202,7 @@ const styles = StyleSheet.create({
         right: 20,
         bottom: 20,
         backgroundColor: '#03A9F4',
-        borderRadius: 30,
-        elevation: 8,
-        zIndex: 2
+        borderRadius: 30
     }
 })
 

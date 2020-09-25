@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect, useLayoutEffect } from 'react';
 import {
     Modal,
     Text,
@@ -8,32 +8,30 @@ import {
     TouchableOpacity
 } from 'react-native';
 
- export default class ModalConfirm extends Component {
+function ModalConfirm (props){
 
- 	constructor(props) {
-        super(props);
+    const [modalVisible, setModalVisible] = useState(false)
 
-        this.state = {
-            modalVisible: this.props.visible
-        };
-    }
+    useEffect(() =>{
+    	if(props.visible){
+    		setModalVisible(props.visible);
+    	}
+    })
 
-    setModalVisible(visible) {
-        this.setState({ modalVisible: visible });
-    }
-
-    butoms() {
-    	if(this.props.confirm){
+    butoms = ()=> {
+    	if(props.confirm){
     		return (
     			<View style={styles.buttoms}>  
 	    			<TouchableOpacity
 	                    onPress={() => {
-	                        setModalVisible(!this.state.modalVisible);
+	                    	props.confirm(false)
+	                        setModalVisible(false);
 	                    }}>
 	                    <Text style={[styles.btn, styles.btnCancel]}>Cancelar</Text>
 	                </TouchableOpacity>
 	                <TouchableOpacity
 	                    onPress={() => {
+	                    	props.confirm(true)
 	                        setModalVisible(false);
 	                    }}>
 	                    <Text style={[styles.btn, styles.btnOperation]}>Adicionar</Text>
@@ -46,7 +44,7 @@ import {
 			<View style={styles.buttoms}>
 	    		<TouchableOpacity
 	                onPress={() => {
-	                    this.setModalVisible(false);
+	                    setModalVisible(false);
 	                }}>
 	                <Text style={[styles.btn, styles.btnOperation]}>Ok</Text>
 	            </TouchableOpacity>
@@ -54,27 +52,24 @@ import {
     	)
     }
 
- 	render(){
+	return(
+		<Modal
+	        style={styles.modal}
+	            animationType="slide"
+	            transparent={true}
+	            visible={modalVisible}
+	            onRequestClose={() => {
+	                Alert.alert('Modal has been closed.');
+	        }}>
 
-		return(
-			<Modal
-		        style={styles.modal}
-		            animationType="slide"
-		            transparent={true}
-		            visible={this.state.modalVisible}
-		            onRequestClose={() => {
-		                Alert.alert('Modal has been closed.');
-		        }}>
-
-    			<View style={styles.modal}>
-                    <View style={styles.backgroundPost}>
-                        <Text style={styles.title}>{ this.props.title }</Text>
-                        { this.butoms() }
-                    </View>
+			<View style={styles.modal}>
+                <View style={styles.backgroundPost}>
+                    <Text style={styles.title}>{ props.title }</Text>
+                    { butoms() }
                 </View>
-            </Modal>
-		)
-	}
+            </View>
+        </Modal>
+	)
 }
 
 const styles = StyleSheet.create({
@@ -120,3 +115,6 @@ const styles = StyleSheet.create({
         color: '#fff'
     }
  })
+
+
+ export default ModalConfirm

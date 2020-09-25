@@ -10,8 +10,6 @@ import {
     Dimensions
 } from 'react-native';
 
-import ModalConfirm from './ModalConfirm';
-
 export default class ModalForm extends Component {
 
     constructor(props) {
@@ -37,30 +35,9 @@ export default class ModalForm extends Component {
         this.setState({ modalVisible: visible });
     }
 
-    setModalVisible2(visible){
-        this.setState({
-            showModalConfirm: visible
-        })
-    }
-
-    confirm(show){
-        console.log('O modal vai aparecer?? '+ show)
-        return(
-            <ModalConfirm
-                title="Post adicionado com sucesso!"
-                visible = { show }
-            />
-        )   
-    }
-
     render() {
         return (
             <View>
-                { this.confirm(this.state.showModalConfirm) }
-                <ModalConfirm
-                    title="Post adicionado com sucesso!"
-                    visible = { this.state.showModalConfirm }
-                />
                 <Modal
                     style={styles.modal}
                     animationType="slide"
@@ -100,7 +77,6 @@ export default class ModalForm extends Component {
                                         );
 
                                         this.onChangeHandler('modalVisible', false);
-                                        this.setModalVisible2(true);
                                     }}>
                                     <Text style={[styles.btn, styles.btnAdd]}>Adicionar</Text>
                                 </TouchableOpacity>
